@@ -15,9 +15,9 @@
 </head>
 <body>
     <header class="header sticky-top d-flex align-items-center">
-        <div class="header-logo">
+        <a class="header-logo" href="{% url "main:catalog" %}">
             <img src="{% static 'img/rev.png' %}" alt="">
-        </div>
+        </ф>
         {% comment %} <div class="search">
             <form action="" id="search-form" class="search_form d-flex" style="display: none;">
                 <input type="text" name="q" class="form_input" placeholder="Search">
@@ -28,7 +28,7 @@
             <a href="" class="h-profile">
                 <img src="{% static 'img/profile.png' %}" alt="">
             </a>
-            <a href="" class="h-profile">
+            <a href="{% url "cart:cart_detail" %}" class="h-profile">
                 <img src="{% static 'img/cart.png' %}" alt="">
             </a>
             <div class="forsearch">
