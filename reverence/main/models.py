@@ -21,6 +21,9 @@ class Category(models.Model):
         verbose_name = "category"
         verbose_name_plural = "categories"
 
+    def get_item_count(self):
+        return ClothingItem.objects.filter(category=self).count()
+
 
 class ClothingItem(models.Model):
     name = models.CharField(max_length=255)
@@ -43,7 +46,7 @@ class ClothingItem(models.Model):
         return self.name
 
     def get_price_with_discount(self):
-        if self.discount > 0:
+        if self.discount and self.discount > 0:
             return self.price * (1 - (self.discount / 100))
         return self.price
 
@@ -55,3 +58,13 @@ class ClothingItemSize(models.Model):
 
     class Meta:
         unique_together = ("clothing_item", "size")
+
+
+class ItemImage(models.Model):
+    product = models.ForeignKey(
+        ClothingItem, related_name="images", on_delete=models.CASCADE
+    )
+    image = models.ImageField(upload_to="product/%Y/%m/%d", blank=True)
+
+    def __str__(self):
+        return f"{self.product.name} - {self.image.name}"
