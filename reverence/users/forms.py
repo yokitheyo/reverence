@@ -37,6 +37,6 @@ class UserProfileForm(forms.ModelForm):
             "city",
             "street",
             "house_number",
-            "appartment_number",
+            "apartment_number",
             "postal_code",
         ]
