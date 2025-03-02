@@ -20,7 +20,7 @@ def order_create(request):
         form = OrderForm(request.POST)
         if form.is_valid():
             order = Order(
-                request.user,
+                user=request.user,
                 first_name=form.cleaned_data.get("first_name"),
                 last_name=form.cleaned_data.get("last_name"),
                 middle_name=form.cleaned_data.get("middle_name"),
@@ -36,7 +36,7 @@ def order_create(request):
                 size_instance = Size.objects.get(name=item["size"])
                 OrderItem.objects.create(
                     order=order,
-                    clothing_item=item["size"],
+                    clothing_item=item["item"],
                     size=size_instance,
                     quantity=item["quantity"],
                     total_price=item["total_price"],
@@ -59,9 +59,11 @@ def order_create(request):
                         for item in cart
                     ],
                     mode="payment",
-                    success_url="http://localhost:8000/order/completed",
-                    cancel_url="http://localhost:8000/order/create",
+                    success_url="http://localhost:8000/orders/completed",
+                    cancel_url="http://localhost:8000/orders/create",
                 )
+
+                return redirect(session.url, code=303)
             except Exception as e:
                 return render(
                     request,

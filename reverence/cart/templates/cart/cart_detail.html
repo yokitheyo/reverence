@@ -40,10 +40,10 @@
                                 ${{ item.total_price|floatformat:2 }}
                             </div>
                             <div class="c-item-quantity">
-                                <form action="{% url "cart:cart_update" item.item.id %}" id="update_form-{{ item.item.id }}" method="post" class="c-quantity-form">
+                                <form action="{% url 'cart:cart_update' item.item.id %}" id="update_form-{{ item.item.id }}" method="post" class="c-quantity-form">
                                     {% csrf_token %}
                                     <input type="number" class="text-center" name="quantity" value="{{ item.quantity}}" min="1" required id="quantity-{{ item.item.id }}" oninput="updateCart({{ item.item.id }})">
-                                    <a href="{% url "cart:cart_remove" item.item.id %}">Remove</a>
+                                    <a href="{% url 'cart:cart_remove' item.item.id %}">Remove</a>
                                 </form>
                             </div>
                             <div class="c-item-total">
@@ -57,7 +57,7 @@
     </div>
     {% if cart|length > 0  %}
         <h3 class="total_price_cart mt-3">Total price: ${{ cart.get_total_price|floatformat:2 }}</h3>
-        <a href="" class="default-btn">Create order</a>
+        <a href="{% url "orders:order_create" %}" class="default-btn">Create order</a>
     {% endif %}
 
     <script>

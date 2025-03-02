@@ -14,6 +14,7 @@ class CatalogView(ListView):
         size_names = self.request.GET.getlist("size")
         min_price = self.request.GET.get("min_price")
         max_price = self.request.GET.get("max_price")
+        search_query = self.request.GET.get("q")
 
         if category_slugs:
             queryset = queryset.filter(category__slug__in=category_slugs)
@@ -30,6 +31,10 @@ class CatalogView(ListView):
         if max_price:
             queryset = queryset.filter(price__lte=max_price)
 
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) | Q(description__icontains=search_query)
+            ).distinct
         return queryset
 
     def get_context_data(self, **kwargs):

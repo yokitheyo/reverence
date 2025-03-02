@@ -12,6 +12,6 @@ class OrderForm(forms.ModelForm):
             "city",
             "street",
             "house_number",
-            "apartament_number",
+            "apartment_number",
             "postal_code",
         ]
