@@ -1,12 +1,20 @@
 from django.contrib import admin
+
 from .models import User
 
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("email", "first_name", "last_name", "is_staff", "is_active")
+    list_display = (
+        "email",
+        "first_name",
+        "last_name",
+        "is_verified",
+        "is_active",
+        "is_staff",
+    )
     search_fields = ("email", "first_name", "last_name")
-    list_filter = ("is_staff", "is_active")
+    list_filter = ("is_staff", "is_active", "is_verified")
     ordering = ("email",)
 
     fieldsets = (
@@ -26,7 +34,10 @@ class UserAdmin(admin.ModelAdmin):
                 )
             },
         ),
-        ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser")}),
+        (
+            "Permissions",
+            {"fields": ("is_active", "is_verified", "is_staff", "is_superuser")},
+        ),
     )
 
     add_fieldsets = (
@@ -38,6 +49,7 @@ class UserAdmin(admin.ModelAdmin):
                 "password1",
                 "password2",
                 "is_active",
+                "is_verified",
                 "is_staff",
                 "is_superuser",
             ),

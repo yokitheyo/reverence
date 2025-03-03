@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import order_create, order_success
 
+from .views import order_create, order_success
 
 app_name = "orders"
 

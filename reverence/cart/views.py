@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
-from .cart import Cart
+
 from main.models import ClothingItem, ClothingItemSize, Size
+
+from .cart import Cart
 
 
 def cart_detail(request):

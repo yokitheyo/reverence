@@ -1,6 +1,7 @@
-from django.views.generic import ListView, DetailView
 from django.db.models import Q
-from .models import ClothingItem, Category, Size, ClothingItemSize
+from django.views.generic import DetailView, ListView
+
+from .models import Category, ClothingItem, ClothingItemSize, Size
 
 
 class CatalogView(ListView):

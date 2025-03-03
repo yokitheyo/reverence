@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+import stripe
 from django.conf import settings
-from .forms import OrderForm
-from .models import OrderItem, Order
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
+
 from cart.cart import Cart
 from main.models import Size
-import stripe
 
+from .forms import OrderForm
+from .models import Order, OrderItem
 
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
